@@ -34,9 +34,9 @@ Start en ny chat og prøv disse instruksene:
 > I mappen tidtaker ligger det et program. Forklar meg hva det gjør, hvilken teknologi det bruker og hvordan jeg kommer i gang.
 
 ## Oppgave: Bli kjent med teknologien
-Var det noe nytt her som du ikke kjenner til? Prøv noe som dette:
+Var det noe nytt her som du ikke kjenner til? Fortsett i samme chat og spør om teknologiene som er i bruk:
 
-> Kan du forklare meg mer om teknologien x, y og z?
+> Kan du forklare meg mer om teknologiene pocketbase, htmx og tailwind?
 
 ## Oppgave: Lagre resultatet
 Høyreklikk, velg _Copy all_, lagre til tidtaker.md, commit og push:
