@@ -38,6 +38,6 @@ Gjennomfør disse stegene:
 
 4. Høyreklikk på responsen og kopier.
 5. Lagre til filen sammendrag.md.
-6. Commit og push: `git commit -m "sammendrag av kurset" && git push`
+6. Commit og push: `git add sammendrag.md && git commit -m "det virker!" && git push` (jeg bruker historikken i din fork til å lage scoreboarden)
 
 Neste steg er [02-chatting.md](02-chatting.md).
