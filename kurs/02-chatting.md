@@ -1,5 +1,5 @@
 # Chat
-Chat er en enkel måte å gjøre små oppgaver, der du jobber interaktivt med agenten.
+Chat er en enkel måte å gjøre små oppgaver, der du jobber interaktivt med KI-modellen.
 
 Passer bra til:
 - Spørre om ting. Alt fra ting som vil finnes i dokumentasjon på et bibliotek til konkrete spørsmål om kodebasen. Eksempler:
