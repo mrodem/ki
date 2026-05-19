@@ -39,8 +39,8 @@ MERK! Dette fungerer kun dersom du bruker lokal VSCode, se [lokal editor](#lokal
 2. Kopier API-nøkkelen
 2. I VSCode, legg til OpenRouter API-nøkkel:
 3. Ctrl/Cmd + Shift + P
-4. > Chat: Manage Language Models
-5. + Add Models...
+4. `> Chat: Manage Language Models`
+5. `+ Add Models...`
 6. OpenRouter
 7. Godta navnet OpenRouter
 8. Lim inn API-nøkkelen
