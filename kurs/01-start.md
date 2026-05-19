@@ -13,6 +13,15 @@ Gjennomfør disse stegene:
 4. Åpne opprettet codespace:
    ![Codespace åpent i nettleser](codespace.png)
 
+### Lokal editor
+Du kan velge å fortsette i nettleser, eller du kan koble lokal instans av VSCode til VM som kjører i CodeSpaces:
+
+1. Trykk helt nede i venstre hjørne der det står _Codespaces: et navn_
+2. Velg _Open in VS Code Desktop_ i dialogen som kommer opp.
+
+![åpner i lokal editor](vscode-dekstop.png)
+
+
 ## Test at Copilot-chaten fungerer
 ### Du har Copilot-lisens?
 1. Gå til https://github.com/settings/copilot/features
@@ -21,15 +30,20 @@ Gjennomfør disse stegene:
 Dersom OK, kan du hoppe over neste steg og gå rett til [Oppgave: Sjekk at det virker](#oppgave-sjekk-at-det-virker).
 
 ### Du har ikke Copilot lisens
+Dersom du ikke har Copilot-lisens, kan du bruke en API-nøkkel som gir deg tilgang til
+samme KI-modell via OpenRouter.
+
+MERK! Dette fungerer kun dersom du bruker lokal VSCode, se [lokal editor](#lokal-editor).
+
 1. Gå til https://arve.dev/ki
 2. Kopier API-nøkkelen
 2. I VSCode, legg til OpenRouter API-nøkkel:
-   1. Ctrl/Cmd + Shift + P
-   2. > Chat: Manage Language Models
-   3. + Add Models...
-   4. OpenRouter
-   5. Godta navnet OpenRouter
-   6. Lim inn API-nøkkelen
+3. Ctrl/Cmd + Shift + P
+4. > Chat: Manage Language Models
+5. + Add Models...
+6. OpenRouter
+7. Godta navnet OpenRouter
+8. Lim inn API-nøkkelen
 
 ### Oppgave: Sjekk at det virker
 1. Åpne chat-vinduet, om det ikke er åpent (Ctrl + Alt/Cmd + I)
