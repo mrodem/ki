@@ -25,7 +25,9 @@ Du kan velge å fortsette i nettleser, eller du kan koble lokal instans av VSCod
 ## Test at Copilot-chaten fungerer
 ### Du har Copilot-lisens?
 1. Gå til https://github.com/settings/copilot/features
-2. Se at du har *Pro*, *Pro+*, *Enterprise* eller tilsvarende. *Free* er ikke tilstrekkelig.
+2. Se at du har *Business*, *Pro*, *Pro+*, *Enterprise* eller tilsvarende. *Free* er ikke tilstrekkelig.
+
+![Copilot Business via Webstep](copilot-business.png)
 
 Dersom OK, kan du hoppe over neste steg og gå rett til [Oppgave: Sjekk at det virker](#oppgave-sjekk-at-det-virker).
 
