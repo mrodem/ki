@@ -2,7 +2,16 @@
 Du har allerede fått en forsmak på agenter. I de forrige oppgavene ba vi agenten om å lagre resultatet også til en fil. En kan skru av "agent"-modusen ved å velge _Ask_ på knappen til venstre for modellen, men typisk vil ikke agenten gjøre noe du ikke ber om. I verste tilfelle kan en alltids angre endringene ved å trykke på knappen _Undo_.
 
 ## Oppgave: Starte tidtaker-applikasjonen
-Bruk [beskrivelsen i tidtaker.md](../tidtaker.md) for å starte tidtaker-tjenesten. Åpne tidtaker-applikasjonen.
+1. Bruk [beskrivelsen i tidtaker.md](../tidtaker.md) for å starte tidtaker-tjenesten.
+2. Det kan ta noe tid før alle avhengigheter er lastet ned.
+3. Når applikasjonen har startet, klikk på adressen i terminalen:
+
+> 2026/06/01 11:50:30 Server started at http://127.0.0.1:8090
+
+4. Registrer deg en bruker.
+5. Verifiser at du er inne:
+
+![logget inn i tidtaker med bruker](tidtaker-innlogget.png)
 
 ## Oppgave: Endre tidtaker-applikasjonen
 Legg merke til at datoen skrives som "21.04.2026".
