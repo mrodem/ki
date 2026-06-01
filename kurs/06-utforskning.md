@@ -26,7 +26,7 @@ Prøv nå denne instruksen:
 Merk: _/grill-me_ aktiverer skillen. Aktivering kan også skje ved at beskrivelsen til skill inneholder "bruk denne instruksen hver gang du lager git commits" eller at din instruks er "bruk grill-me skill".
 
 ## Oppgave: Legge til del av nettside som kontekst
-De fleste kjipe timeføringssystemer har ingen API-er, derfor har vi valgt å automatisere via en plugin i nettleser. Grill-me er ikke deterministisk, men sannsynligvis vil den spørre om hvordan timeføringsprogram du bruker, samt om hvordan timene skal legges inn. Da kan du mate det spesifikke HTML-elementet fra timeføringsprogrammet som kontekst:
+De fleste kjipe timeføringssystemer har ingen API-er, derfor har jeg valgt å automatisere via en plugin i nettleser. Grill-me er ikke deterministisk, men sannsynligvis vil den spørre om hvordan timeføringsprogram du bruker, samt om hvordan timene skal legges inn. Da kan du mate det spesifikke HTML-elementet fra timeføringsprogrammet som kontekst:
 
 1. _Ctrl/Cmd + Shift + P_
 2. _Browser: Open Integrated Browser_
