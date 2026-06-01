@@ -18,9 +18,9 @@ Her skal vi bruke to verktøy for å utvide planen:
 1. [Playwright MCP-server](https://playwright.dev/docs/getting-started-mcp)
 2. [OpenCode CLI](https://opencode.ai)
 
-Playwright MCP-server gir oss muligheten til å styre en nettleser med naturlig språk, "gå til den siden", "trykk på det", osv. OpenCode CLI er en AI-agent, tilsvarende Copilot.
+_Playwright MCP-server_ gir oss muligheten til å styre en nettleser med naturlig språk, "gå til den siden", "trykk på det", osv. _OpenCode CLI_ er en AI-agent, tilsvarende Copilot.
 
-Grunnen til at vi bruker OpenCode CLI er fordi organisasjonen som har ditt Copilot-abonnement kan velge å skru av MCP-støtte i VSCode dersom du har enterprise-abonnementet. Dette omgår vi ved å bruke OpenCode, og får samtidig erfaring med å bruke agenten fra kommandolinje. Det er ingen stor forskjell fra det vi har gjort til nå, det er fortsatt en chat, en gir instrukser og en kan legge til filer og nettsted som kontekst, den støtter AGENTS.md og skills, men grensesnittet er noe ulikt. Eksempelvis legger en til filer med `@filnavn` istedenfor å trykke på knappene i VSCode.
+Grunnen til at vi bruker OpenCode CLI er fordi organisasjonen som har ditt Copilot-abonnement kan velge å skru av MCP-støtte i VSCode dersom du har enterprise-abonnementet. Dette omgår vi ved å bruke OpenCode, og får samtidig erfaring med å bruke agenten fra kommandolinje. Det er ingen stor forskjell fra det vi har gjort til nå, det er fortsatt en chat, en gir instrukser og en kan legge til filer og nettsted som kontekst, den støtter AGENTS.md og skills, men grensesnittet er ulikt. Eksempelvis legger en til filer med `@filnavn` istedenfor å trykke på knappene i VSCode.
 
 ## Oppgave: Logge på timeføringsprogrammet på egen PC
 Agenten kan hente nettsider selv, men da har den ikke dine cookies og innlogginger. For å la agenten se timeføringsprogrammet og klikke i det, skal vi bruke en [Playwright](https://playwright.dev/) først lokalt for å logge på.
@@ -47,7 +47,7 @@ Merk: For å gjennomføre timeføringen kunne vi benyttet denne metoden for å f
 ## Oppgave: Verifisere at Playwright fungerer fra OpenCode i Codespaces
 I OpenCode, skriv denne prompten:
 
-> åpne <url> med playwright, bruk cookies fra auth.json, la skjermstørrelse være 1024x768, lagre skjermbilde til timeføring1.png
+> åpne <url> med playwrigh chromium, bruk cookies fra auth.json, la skjermstørrelse være 1024x768, lagre skjermbilde til timeføring1.png
 
 Åpne skjermbildet og sjekk at du er innlogget. Fortsett med noe som dette:
 
