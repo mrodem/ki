@@ -11,6 +11,8 @@ Du så kanskje at KI-modellen leste README.md-filen til tidtaker når du ba om i
 
 > Hva slags templating er dette? Gi meg en konsis instruks for de vanligste tingene en kan gjøre med templatingen. Skriv svaret her og samtidig til tidtaker/templating.md.
 
+Ettersom agenten skrev til en fil vil chaten vise dette og be om godkjenning. Trykk på _Keep_.
+
 ## Oppgave: Legg til deler av fil
 1. Merk linje 8 i filen [timing_item.html](../tidtaker/templates/timer/timing_item.html): `{{if .Timing.GetBool "isActive"}}`
 2. Legg merke til at linjen allerede er lag til som kontekst, som `timing_item.html:8`.
@@ -20,7 +22,7 @@ Du så kanskje at KI-modellen leste README.md-filen til tidtaker når du ba om i
 
 Merking av bestemte områder som er interessant hjelper modellen å holde fokus på det du lurer på og kan spare deg for en del kopiering, men ofte fungerer det å legge med hele filen også så lenge en klarer å beskrive hva en ønsker svar på. Mindre vedlegg gir også bedre ytelse og mindre kostnad, mer om det senere.
 
-Tips: Fremover kan du markere instruksene her i markdown-filen, skrive "." i chaten og trykke send. Da sparer du deg noen kopi/lim-inn.
+Tips: Fremover kan du markere instruksene her i markdown-filen, trykke på nålen _Pin selection_ for å beholde markeringen når du hopper mellom filer, skrive "." i chaten og trykke send. Da sparer du deg noen kopi/lim-inn.
 
 ## Oppgave: Legg til kontekst fra internett
 En vanlig feil KI-modellen gjør er å bruke gammel informasjon. Her har typisk modellen en cutoff for informasjonen sin, altså tidspunktet for data modellen var trent på.
