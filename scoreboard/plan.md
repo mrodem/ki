@@ -11,15 +11,17 @@ scoreboard/
   public/
     index.html    – Scoreboard-side (HTML/CSS/JS)
     sounds.js     – Web Audio API lyd-generator (ingen ekstern lib)
+  worktrees/      – git worktrees per deltaker (gitignored)
+    {login}/      – utsjekket fork, oppdateres hvert 10. sekund
 ```
 
 ### server.js
 - Innebygd `node:http` – ingen Express eller andre biblioteker
+- Innebygd `node:child_process` (`execSync`) – kjører git-kommandoer
 - Serverer `public/index.html` og statiske filer
 - Server-Sent Events (SSE) endpoint `GET /events` pusher tilstandsoppdateringer til nettleseren
 - `GET /state` returnerer nåværende tilstand som JSON (for initial load)
-- Bakgrunnsjobb hvert **60. sekund**: henter nye deltakere (forks) via `gh api`
-- Bakgrunnsjobb hvert **10. sekund**: sjekker fremdrift for hver deltaker via `gh` CLI
+- Én enkelt loop hvert **10. sekund**: hent forks → sync worktrees → sjekk tilstand → send SSE ved endring
 - Når en deltaker fullfører nytt steg: sender SSE-event `progress` med deltaker og steg
 
 ### public/index.html
@@ -34,19 +36,42 @@ scoreboard/
 - Eksponert som `playPowerUp()` funksjon
 
 ## Deltakere – oppdagelse
-Bruker `gh api /repos/arve0/ki/forks --paginate` hvert minutt.
-Returnerer liste med `{login, avatar_url, html_url}` per fork-eier.
-Nye brukere legges til tilstanden; eksisterende berøres ikke (tilstand bevares).
+Bruker `gh api /repos/arve0/ki/forks --paginate` hvert 10. sekund (billig kall).
+Returnerer liste med `{login, avatar_url}` per fork-eier.
+Nye brukere legges til tilstanden og får opprettet worktree; eksisterende berøres ikke (tilstand bevares).
+
+## Worktree-infrastruktur
+
+For hver deltaker (fork) opprettes en git remote og et git worktree lokalt. All tilstandssjekk gjøres mot det lokale filsystemet – ingen GitHub API per modul.
+
+Alle git-kommandoer kjøres med `{ cwd: repoRoot }` der `repoRoot = path.resolve(__dirname, '..')` (repo-roten, ikke `scoreboard/`).
+
+Alle deltakere antas å bruke `main` som standardbranch.
+
+### initWorktree(login)
+Kjøres for nye deltakere, og ved server-restart for deltakere der worktree-katalogen allerede eksisterer:
+1. Hvis `scoreboard/worktrees/{login}` **ikke** finnes:
+   - `git remote add {login} https://github.com/{login}/ki.git` (hopp over hvis remote allerede finnes)
+   - `git fetch {login} --depth=50`
+   - `git worktree add scoreboard/worktrees/{login} {login}/main`
+2. Hvis katalogen **allerede finnes** (server-restart): kall direkte `syncWorktree(login)` og fortsett loopen.
+
+### syncWorktree(login)
+Kjøres hvert 10. sekund for eksisterende deltakere:
+1. `git fetch {login} --depth=50`
+2. `git -C scoreboard/worktrees/{login} reset --hard {login}/main`
+
+Feil (slettet fork, privat repo, nettverk): fanges med try/catch, advarsel logges, deltaker hoppes over den runden – loopen fortsetter uavhengig.
 
 ## Fremdriftsdeteksjon per modul
 
-Deteksjon er basert på signaler som allerede finnes i kursmaterialet – ingen ekstra script kreves av deltakere. All matching er **case-insensitive** (toLowerCase på begge sider). Alle API-kall gjøres via `gh api`.
+Deteksjon er basert på signaler som allerede finnes i kursmaterialet – ingen ekstra script kreves av deltakere. All matching er **case-insensitive** (toLowerCase på begge sider). All sjekk skjer mot lokalt filsystem i `scoreboard/worktrees/{login}/`.
 
 ### Deteksjonsmetoder (prioritert rekkefølge)
 
-1. **Fileksistens** – `gh api /repos/{login}/ki/contents/{path}` → HTTP 200 = fullført, 404 = ikke gjort. Rask og stabil.
-2. **Commit-melding fuzzy-match** – `gh api /repos/{login}/ki/commits?path={path}&per_page=20` → iterer over `commit.message`, lowercase, sjekk om noen av søkeordene finnes med `includes()`. Brukes der ingen naturlig fil finnes.
-3. **Filinnhold fuzzy-match** – Hent fil via API, base64-decode, lowercase, sjekk at søkeord finnes. Brukes kun der innhold skiller mellom to moduler.
+1. **Fileksistens** – `fs.existsSync(path.join('scoreboard/worktrees', login, relPath))` → `true` = fullført. Rask og stabil.
+2. **Commit-melding fuzzy-match** – `git -C scoreboard/worktrees/{login} log --oneline -20 {login}/main ^origin/main -- {path}`, iterer over linjer, lowercase, sjekk om noen av søkeordene finnes med `includes()`. `^origin/main` ekskluderer upstream-commits fra arve0/ki slik at kun deltakeres egne commits matches. Brukes der ingen naturlig fil finnes.
+3. **Filinnhold fuzzy-match** – `fs.readFileSync(..., 'utf8').toLowerCase().includes(keyword)`. Brukes kun der innhold skiller mellom to moduler.
 
 ---
 
@@ -160,6 +185,22 @@ Filen `tidtaker/eksport.md` finnes fra modul 06, men innholdet utvides med playw
 
 Modul 08 er referansemateriell uten konkrete commit-oppgaver. Ingen automatisk deteksjon – markeres som fullført manuelt av kursholder eller settes alltid som «bonus/ekstra».
 
+## Hovedloop
+
+```
+while true:
+  forks = hentForks()                        // gh api – eneste eksterne kall
+  for fork of forks:
+    if ny: initWorktree(fork.login)
+    else:  syncWorktree(fork.login)
+  for login of state.participants:
+    tidligere = [...completedModules]
+    sjekkModuler(login)                      // lokalt filsystem
+    if completedModules endret:
+      send SSE-event "progress"
+  vent 10 sekunder
+```
+
 ## Tilstandsmodell (in-memory i server.js)
 
 ```js
@@ -202,12 +243,13 @@ Alternativt kan du generere lydfila selv med [BeepBox](https://www.beepbox.co/) 
 
 ## Todos
 
-1. Lag `scoreboard/server.js` med HTTP-server, SSE, polling av GitHub API
-2. Lag `scoreboard/public/index.html` med grid-layout og SSE-klient
-3. Lag `scoreboard/public/sounds.js` med Web Audio API power-up lyd
-4. Test at ny deltaker dukker opp automatisk
-5. Test at fullføring av modul trigger lyd og oppdaterer board
-6. (Valgfritt) Legg til `scoreboard/README.md` med kjøre-instrukser
+1. Legg til `scoreboard/worktrees/` i `.gitignore`
+2. Lag `scoreboard/server.js` med HTTP-server, SSE, worktree-infrastruktur og hovedloop
+3. Lag `scoreboard/public/index.html` med grid-layout og SSE-klient
+4. Lag `scoreboard/public/sounds.js` med Web Audio API power-up lyd
+5. Test at ny deltaker dukker opp automatisk og at worktree opprettes
+6. Test at fullføring av modul trigger lyd og oppdaterer board
+7. (Valgfritt) Legg til `scoreboard/README.md` med kjøre-instrukser
 
 ## Kjøring
 
