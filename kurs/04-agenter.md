@@ -15,10 +15,10 @@ Du har allerede fått en forsmak på agenter. I de forrige oppgavene ba vi agent
 
 ## Oppgave: Endre tidtaker-applikasjonen
 1. Start og stopp en tidtakning.
-2. Legg merke til at datoen skrives som "21.04.2026".
+2. Legg merke til at datoen skrives som "02.06.2026".
 3. Prøv denne instruksen:
 
-> I applikasjonen tidtaker vises datoen til en tidtaking som "21.04.2026", men jeg ønsker format på formen "21. april 2026". Kan du endre implementasjonen?
+> I applikasjonen tidtaker vises datoen til en tidtaking som "02.06.2026", men jeg ønsker format på formen "2. juni 2026". Kan du endre implementasjonen?
 
 Stopp og start applikasjonen for å sjekke at det virker.
 
