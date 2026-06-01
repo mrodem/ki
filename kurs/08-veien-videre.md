@@ -104,6 +104,14 @@ Sammenligne disse:
 > Start ved å skrive en test som sjekker at endepunkt /a inneholder teksten "ny funksjonalitet". Sørg for at testen feiler (TDD rød). Implementer funksjonaliteten. Kjør testen på ny. Sørg for at testen er OK (TDD grønn). Verifiser at alle andre tester også kjører og er grønn.
 
 
+# Hva er gode tester for en agent?
+Agenten er veldig flink til å skrive tester, kanskje for flink. Eksempelvis, dersom du har kode som er vanskelig å teste på grunn av sterkt koblede avhengigheter, så mocker agenten gjerne bort avhengighetene for å teste en bit av koden. Den er sykt god på mocking, men tester med mye mocking representerer ofte dårlig kode og sårbare tester.
+
+Jeg ber ikke ageten skrive slike tester, jeg fokuserer kun på ende-til-ende tester. Det er utfallet, hensikten og formålet som er viktig. Selfølgelig ingen regler uten unntak, det gir mening å skrive tester for moduler du skal skrive om, men tenk deg om for hvilket grensesnitt du legger testene på. Kommer du deg lenger unna koden og nærmere produktet er det mye enklere å verifisere at testene er riktig.
+
+I den grad jeg gjør review av kode, er det review av testkode jeg bruker mest tid på. Ble dette slik jeg forestilte meg? Beskriver det formålet med den nye funksjonaliteten? Vil testen fungere likevel om jeg bytter ut implementasjonen?
+
+
 # Problemer med fyllt kontekst
 Hvis du jobber lenge i en og samme chat, eller du jobber i en stor kodebase der agenten leser mye kode, kan en havne i en situasjon der instrukser ikke lenger fungerer. KI-modeller har en øvre grense på hvor mye informasjon og hvor mange instrukser en og samme sesjon kan inneholde.
 
@@ -173,9 +181,6 @@ Se om den klarer å trekke ut informasjon fra JSON:
 > Se innlimt JSON. Hent ut x y og z. La output være strukturert JSON på formen {"x": "...", "y": "...", "z": "..."}
 
 Advarsel: Å gjøre seg kjent med de tekniske begrepene for KI-modeller er et kaninhull. Antall parametre, kvantifisert, mode of expert, gguf, osv. Her kan du synke mye tid. Tips, bruk gemini til å forklare hva de ulike tingene er.
-
-
-# Hva er gode tester for en agent?
 
 
 # Skal vi bry oss om kodekvalitet nå?
