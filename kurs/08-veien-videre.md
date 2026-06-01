@@ -101,7 +101,7 @@ Sammenligne disse:
 
 > Implementer funksjonaliteten. Når du er ferdig skal du kjøre alle testene. Kjør opp server og sjekk at endepunkt /a nå inneholder teksten "ny funksjonalitet", først da er du ferdig.
 
-> Start ved å skrive en test som sjekker at endepunkt /a inneholder teksten "ny funksjonalitet". Sørg for at testen feiler (TDD red). Implementer funksjonaliteten. Kjør testen på ny. Sørg for at testen er OK (TDD grønn). Verifiser at alle andre tester også kjører og er grønn.
+> Start ved å skrive en test som sjekker at endepunkt /a inneholder teksten "ny funksjonalitet". Sørg for at testen feiler (TDD rød). Implementer funksjonaliteten. Kjør testen på ny. Sørg for at testen er OK (TDD grønn). Verifiser at alle andre tester også kjører og er grønn.
 
 
 # Problemer med fyllt kontekst
