@@ -10,7 +10,7 @@ En tidsregistreringsapplikasjon bygget med PocketBase og HTMX.
 - **Redigering** – Endre start-/stopptid og beskrivelse i etterkant
 - **Uendelig scroll** – Bla gjennom alle registreringer med automatisk lasting
 - **Søk** – Fulltekstsøk på beskrivelse og tagger (AND-basert)
-- **Filter og sortering** – Filtrer på tagger, sorter på tid eller beskrivelse
+- **Datoformat** – Datoer vises med norske månedsnavn, f.eks. "2. juni 2026"
 
 ## Stack
 

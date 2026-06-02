@@ -127,6 +127,26 @@ test.describe('Redigering', () => {
   });
 });
 
+test.describe('Datoformat', () => {
+  test('viser dato med norsk månedsnavn, f.eks. "21. april 2026"', async ({ page }) => {
+    await loginAsNewUser(page);
+
+    // Create a timing
+    await page.click('button:has-text("Start")');
+    await page.waitForTimeout(500);
+    await page.click('button:has-text("Stopp")');
+
+    await expect(page.locator('#timings-list .bg-white')).toHaveCount(1);
+
+    // Date should be in format "D. månedsnavn YYYY", not "DD.MM.YYYY"
+    const norwegianMonths = ['januar', 'februar', 'mars', 'april', 'mai', 'juni',
+      'juli', 'august', 'september', 'oktober', 'november', 'desember'];
+    const dateText = await page.locator('#timings-list .text-xs.text-gray-500').first().innerText();
+    const hasNorwegianMonth = norwegianMonths.some(month => dateText.includes(month));
+    expect(hasNorwegianMonth, `Forventet norsk månedsnavn i datoformat, men fikk: "${dateText}"`).toBe(true);
+  });
+});
+
 test.describe('Slett timing', () => {
   test('kan slette en timing', async ({ page }) => {
     await loginAsNewUser(page);
