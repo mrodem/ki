@@ -5,7 +5,7 @@ En tidsregistreringsapplikasjon bygget med PocketBase og HTMX.
 ## Funksjoner
 
 - **Autentisering** – Registrering og innlogging med e-post/passord
-- **Timer** – Start/stopp tidtaking med ett klikk
+- **Timer** – Start/stopp tidtaking med ett klikk; viser løpende tid som oppdateres hvert sekund
 - **Beskrivelser og tags** – Legg til beskrivelse og tagger på registreringer
 - **Redigering** – Endre start-/stopptid og beskrivelse i etterkant
 - **Uendelig scroll** – Bla gjennom alle registreringer med automatisk lasting

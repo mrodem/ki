@@ -147,6 +147,24 @@ test.describe('Datoformat', () => {
   });
 });
 
+test.describe('Timer teller', () => {
+  test('tidtaker oppdaterer visning uten sideopplasting', async ({ page }) => {
+    await loginAsNewUser(page);
+
+    await page.click('button:has-text("Start")');
+    await expect(page.locator('#active-timer')).toBeVisible();
+
+    const first = await page.locator('#active-timer').innerText();
+
+    // Wait >1 second so the JS ticker should have updated the display
+    await page.waitForTimeout(2000);
+
+    const second = await page.locator('#active-timer').innerText();
+
+    expect(first).not.toBe(second);
+  });
+});
+
 test.describe('Slett timing', () => {
   test('kan slette en timing', async ({ page }) => {
     await loginAsNewUser(page);

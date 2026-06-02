@@ -4,9 +4,30 @@
   <!-- Active timer -->
   <div class="text-center">
     <div class="text-lg font-medium text-green-600 mb-2">Timer aktiv</div>
-    <div class="text-3xl font-mono font-bold text-gray-800 mb-4" id="active-timer">
+    <div class="text-3xl font-mono font-bold text-gray-800 mb-4" id="active-timer"
+      data-start-time="{{(.ActiveTiming.GetDateTime "startTime").Unix}}">
       {{formatDuration (.ActiveTiming.GetDateTime "startTime") (.ActiveTiming.GetDateTime "stopTime")}}
     </div>
+    <script>
+      (function() {
+        var el = document.getElementById('active-timer');
+        if (!el) return;
+        var startUnix = parseInt(el.dataset.startTime, 10);
+        function pad(n) { return String(n).padStart(2, '0'); }
+        function tick() {
+          var seconds = Math.floor(Date.now() / 1000) - startUnix;
+          var h = Math.floor(seconds / 3600);
+          var m = Math.floor((seconds % 3600) / 60);
+          var s = seconds % 60;
+          el.textContent = (h > 0 ? h + ':' : '') + pad(m) + ':' + pad(s);
+        }
+        tick();
+        var iv = setInterval(function() {
+          if (!document.getElementById('active-timer')) { clearInterval(iv); return; }
+          tick();
+        }, 1000);
+      })();
+    </script>
     <button
       class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors font-medium text-lg"
       hx-post="/api/timings/{{.ActiveTiming.Id}}/stop"
